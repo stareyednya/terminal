@@ -33,15 +33,58 @@ const command_list = ['clear'].concat(Object.keys(commands));
 const formatted_list = command_list.map(cmd => `<white class="command">${cmd}</white>`);
 const help = formatter.format(formatted_list);
 
-const term = $('body').terminal(commands, {
-    completion: true,
-    checkArity: false,
-    greetings: false
+const term = $('#terminal').terminal(function(command, term) {
+    var cmd = $.terminal.parse_command(command);
+    if (cmd.name === 'exit') {
+        exit();
+    } else if (cmd.name === 'echo') {
+        term.echo(cmd.rest);
+    } else if (command !== '') {
+        try {
+            var result = __EVAL(command);
+            if (result && result instanceof $.fn.init) {
+                term.echo('<#jQuery>');
+            } else if (result && typeof result === 'object') {
+                tree(result);
+            } else if (result !== undefined) {
+                term.echo(new String(result));
+            }
+        } catch(e) {
+            term.error(new String(e));
+        }
+    }
 }, {
-    keydown() {
-        sound.play();
+    name: 'js_demo',
+    onResize: set_size,
+    exit: false,
+    // detect iframe codepen preview
+    enabled: $('body').attr('onload') === undefined,
+    onInit: function() {
+        set_size();
+        this.echo('Type [[b;#fff;]exit] to see turn off animation.');
+        this.echo('Type and execute [[b;#fff;]grab()] function to get the scre' +
+                  'enshot from your camera');
+        this.echo('Type [[b;#fff;]camera()] to get video and [[b;#fff;]pause()]/[[b;#fff;]play()] to stop/play');
     },
+    onClear: function() {
+        console.log(this.find('video').length);
+        this.find('video').map(function() {
+            console.log(this.src);
+            return this.src;
+        });
+    },
+    prompt: 'js> '
 });
+
+function set_size() {
+    // for window height of 170 it should be 2s
+    var height = $(window).height();
+    var width = $(window).width()
+    var time = (height * 2) / 170;
+    scanlines[0].style.setProperty("--time", time);
+    tv[0].style.setProperty("--width", width);
+    tv[0].style.setProperty("--height", height);
+}
 
 term.on('click', '.command', function() {
    const command = $(this).text();
