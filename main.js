@@ -28,7 +28,7 @@ const commands = {
         this.echo(`List of available commands: ${help}`);
     }
 };
-
+const sound = new Audio('https://cdn.jsdelivr.net/gh/jcubic/static@master/assets/mech-keyboard-keystroke_3.mp3')
 const command_list = ['clear'].concat(Object.keys(commands));
 const formatted_list = command_list.map(cmd => `<white class="command">${cmd}</white>`);
 const help = formatter.format(formatted_list);
@@ -53,8 +53,6 @@ function ready() {
     term.echo(() => rainbow(render('Firmament'), seed))
         .echo('<white>Welcome to Terminal Website Template</white>\n').resume();
 }
-
-const sound = new Audio('https://cdn.jsdelivr.net/gh/jcubic/static@master/assets/mech-keyboard-keystroke_3.mp3')
 
 function rainbow(string, seed) {
     return lolcat.rainbow(function(char, color) {
