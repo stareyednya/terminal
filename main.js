@@ -38,22 +38,9 @@ const term = $('body').terminal(commands, {
     checkArity: false,
     greetings: false
 }, {
-    name: 'js_demo',
-    onResize: set_size,
-    exit: false,
-    // detect iframe codepen preview
-    enabled: $('body').attr('onload') === undefined,
     keydown() {
         sound.play();
     },
-    onInit: function() {
-        set_size();
-        this.echo('Type [[b;#fff;;command]exit] to see turn off animation.');
-        this.echo('Type and execute [[b;#fff;;command]grab()] function to get the scre' +
-                  'enshot from your camera');
-        this.echo('Type [[b;#fff;;command]camera()] to get video and [[b;#fff;;command]pause()]/[[b;#fff;;command]play()] to stop/play');
-    },
-    prompt: 'js> '
 });
 
 term.on('click', '.command', function() {
