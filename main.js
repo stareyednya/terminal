@@ -52,6 +52,7 @@ function ready() {
     const seed = rand(256);
     term.echo(() => rainbow(render('Firmament'), seed))
         .echo('<white>Welcome to Terminal Website Template</white>\n').resume();
+    animation();
 }
 
 function rainbow(string, seed) {
@@ -82,4 +83,12 @@ function hex(color) {
     return '#' + [color.red, color.green, color.blue].map(n => {
         return n.toString(16).padStart(2, '0');
     }).join('');
+}
+
+function animation() {
+    this.animation(async () => {
+        await this.echo("Hello, ", { typing: true, delay: 10, newline: false });
+        await this.echo("jQuery ", { typing: true, delay: 100, newline: false });
+        await this.echo("Terminal", { typing: true, delay: 100 });
+    });
 }
