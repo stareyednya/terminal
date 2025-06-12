@@ -1,0 +1,41 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>Terminal Website Template</title>
+    <meta name="Description" content="Template for Terminal Based Website"/>
+    <link rel="shortcut icon" href="./favicon.ico"/>
+    <style>
+:root {
+    --color: #aaa;
+    --background: #000;
+    --size: 1.2;
+    --font: monospace;
+    /* --glow: 1 */
+    --animation: terminal-blink;
+}
+
+.command {
+    cursor: pointer;
+}
+
+@media screen and (min-width: 1200px) {
+    :root {
+        --size: 1.4;
+    }
+}
+    </style>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="https://cdn.jsdelivr.net/npm/jquery.terminal/css/jquery.terminal.min.css" rel="stylesheet" />
+</head>
+<body>
+<script src="https://cdn.jsdelivr.net/npm/jquery"></script>
+<script src="https://cdn.jsdelivr.net/gh/jcubic/static/js/wcwidth.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery.terminal/js/jquery.terminal.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery.terminal/js/xml_formatting.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/js-polyfills/keyboard.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/isomorphic-lolcat/index.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/figlet/lib/figlet.js"></script>
+<script src="./main.js"></script>
+</body>
+</html>
