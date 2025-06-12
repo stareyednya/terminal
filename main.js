@@ -95,7 +95,6 @@ function ready() {
     const seed = rand(256);
     term.echo(() => rainbow(render('Firmament'), seed))
         .echo('<white>Welcome to Terminal Website Template</white>\n').resume();
-    animation();
 }
 
 function rainbow(string, seed) {
