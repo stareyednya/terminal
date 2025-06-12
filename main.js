@@ -42,13 +42,32 @@ const term = $('body').terminal(commands, {
 term.on('click', '.command', function() {
    const command = $(this).text();
    term.exec(command, { typing: true, delay: 50 });
+},, {
+    name: 'js_demo',
+    onResize: set_size,
+    exit: false,
+    // detect iframe codepen preview
+    enabled: $('body').attr('onload') === undefined,
+    keydown() {
+        sound.play();
+    },
+    onInit: function() {
+        set_size();
+        this.echo('Type [[b;#fff;;command]exit] to see turn off animation.');
+        this.echo('Type and execute [[b;#fff;;command]grab()] function to get the scre' +
+                  'enshot from your camera');
+        this.echo('Type [[b;#fff;;command]camera()] to get video and [[b;#fff;;command]pause()]/[[b;#fff;;command]play()] to stop/play');
+    },
+    prompt: 'js> '
 });
 
 function ready() {
     const seed = rand(256);
-    term.echo(() => rainbow(render('Terminal Website'), seed))
+    term.echo(() => rainbow(render('Firmament'), seed))
         .echo('<white>Welcome to Terminal Website Template</white>\n').resume();
 }
+
+const sound = new Audio('https://cdn.jsdelivr.net/gh/jcubic/static@master/assets/mech-keyboard-keystroke_3.mp3')
 
 function rainbow(string, seed) {
     return lolcat.rainbow(function(char, color) {
