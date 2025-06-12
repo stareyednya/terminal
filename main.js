@@ -37,12 +37,7 @@ const term = $('body').terminal(commands, {
     completion: true,
     checkArity: false,
     greetings: false
-});
-
-term.on('click', '.command', function() {
-   const command = $(this).text();
-   term.exec(command, { typing: true, delay: 50 });
-},, {
+}, {
     name: 'js_demo',
     onResize: set_size,
     exit: false,
@@ -59,6 +54,11 @@ term.on('click', '.command', function() {
         this.echo('Type [[b;#fff;;command]camera()] to get video and [[b;#fff;;command]pause()]/[[b;#fff;;command]play()] to stop/play');
     },
     prompt: 'js> '
+});
+
+term.on('click', '.command', function() {
+   const command = $(this).text();
+   term.exec(command, { typing: true, delay: 50 });
 });
 
 function ready() {
